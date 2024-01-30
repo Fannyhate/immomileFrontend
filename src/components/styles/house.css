@@ -1,0 +1,66 @@
+
+
+.houseCard {
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 350px;
+    margin-bottom: 30px;
+    font-family: Manrope;
+    border-radius: 5px;
+
+}
+
+.houseCard h2 {
+    margin-left: 20px;
+}
+.containerOption {
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+    display: flex;
+    margin: 30px 50px;
+}
+.optionHeader {
+    max-width: 100%;
+    position: relative;
+    min-width: 100%;
+    max-height: 370px
+}
+
+.houseCard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    opacity: 0.70;
+}
+
+.container {
+    padding: 2px 16px;
+}
+.houseCard img {
+    max-height: 350px;
+    min-height: 350px;
+    min-width: 350px;
+}
+
+.houseInformationContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+.houseCard .informationContainer {
+    display: flex;
+    padding: 3px;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: -8px;
+}
+
+.houseCard .informationContainer p {
+    font-size:  20px;
+}

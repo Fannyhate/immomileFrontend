@@ -1,0 +1,26 @@
+{
+  "name": "immo_mile",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource/tajawal": "^5.0.8",
+    "@okta/okta-auth-js": "^7.5.0",
+    "@okta/okta-signin-widget": "^7.14.0",
+    "@okta/okta-vue": "^5.7.0",
+    "axios": "^1.6.4",
+    "md5": "^2.3.0",
+    "vue": "^3.4.3",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.2",
+    "sass": "^1.69.7",
+    "vite": "^5.0.10"
+  }
+}
