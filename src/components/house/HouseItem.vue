@@ -6,6 +6,7 @@
 
 
         <img  v-bind:src="imageUrl[0]?.urlImg"  alt="Avatar" style="width:100%">
+        <h2>test</h2>
 
 
 
