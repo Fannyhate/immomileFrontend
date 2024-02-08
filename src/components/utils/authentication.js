@@ -6,7 +6,17 @@ const getLocalUser = ()=>{
         return user
     }
     else {
-        window.location.href ="/login"
+        if(!window.location.href.includes("/login")){
+            window.localStorage.setItem("userInfo", "")
+            window.location.href ="/login"
+        }
+
+
     }
 }
-export default  getLocalUser
+
+function logOut(){
+    window.localStorage.removeItem("userInfo")
+    window.location.href ="/login"
+}
+export default  {getLocalUser, logOut}

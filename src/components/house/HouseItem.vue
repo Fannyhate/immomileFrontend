@@ -1,6 +1,16 @@
 <template>
 
 
+  <div v-if="displayModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <button @click="this.closeModalsApply()" class="close">&times;</button>
+      <FirstContact :houseId="houseId"></FirstContact>
+    </div>
+
+  </div>
+
     <div class="containerOption">
       <div class="houseCard">
 
@@ -37,6 +47,14 @@
 
         <div class="informationContainer">
 
+          <p> Anzahl Zimmer</p>
+
+          <p> {{this.room }} </p>
+
+        </div>
+
+        <div class="informationContainer">
+
           <p> PLZ</p>
 
           <p> {{this.postcode}} </p>
@@ -45,7 +63,7 @@
 
         <div v-if="!this.checkUserOptions()" class="informationContainer">
           <p></p>
-          <button onclick="this.openDetailsApply()"> BEWERBEN</button>
+          <button @click="this.openModalApply(this.house?.id)"> BEWERBEN</button>
 
         </div>
 
@@ -79,8 +97,10 @@
 import '../styles/house.css'
 import getLocalUser from "@/components/utils/authentication.js";
 import axios from "axios";
+import FirstContact from "@/components/forms/FirstContact.vue";
 export default {
   name: "HouseItem",
+  components: {FirstContact},
   props : {
     price: Number,
     room: Number,
@@ -89,27 +109,26 @@ export default {
     floor: Number,
     postcode: String,
     house: {},
-    connectedUser: getLocalUser()
+    connectedUser: getLocalUser.getLocalUser()
 
   },
   methods: {
     checkUserOptions(){
-      let user  = getLocalUser()
+      let user  = getLocalUser.getLocalUser()
       if(this.house?.myHome?.id === user.id){
         return true
       }
       return false
     },
-    closeDetailsApply(){
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("main").style.marginLeft= "0";
+    closeModalsApply(){
+      this.displayModal =false
     },
-    openDetailsApply(){
-      document.getElementById("mySidenav").style.width = "450px";
-      document.getElementById("main").style.marginLeft = "250px";
+    openModalApply(houseId){
+      this.displayModal =true
+      this.houseId = houseId
     },
     deleteHouse(id){
-      debugger
+
       const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL
       const deleteHouseUrl = baseUrl + "/api/deleteHouse?houseId=" + id
       axios.delete( deleteHouseUrl).then(()=>{
@@ -123,7 +142,14 @@ export default {
   },
   mounted() {
     this.checkUserOptions()
-  }
+
+  },
+  data (){
+    return {
+      displayModal: false,
+      houseId: 0
+    }
+  },
 }
 </script>
 
@@ -166,5 +192,46 @@ export default {
 #main {
   transition: margin-left .5s;
   padding: 16px;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: block;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>

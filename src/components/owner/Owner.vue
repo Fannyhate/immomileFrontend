@@ -1,12 +1,22 @@
 <template>
 
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+
+  </div>
+
   <div class="form" >
 
     <div class="container">
 
       <h2 v-if="!isUpdate"> Welcome Neues House einfügen </h2>
       <h2 v-if="isUpdate"> Welcome Zur Editierung des House in {{this.address}} </h2>
-      <input v-model="this.address" placeholder="Straße, Hausnummer" class="form-control" name ="addresse" type="text"/>
+      <input v-model="this.address" placeholder="Location" class="form-control" name ="addresse" type="text"/>
 
       <input v-model="this.floor" placeholder="Etage " class="form-control"  name ="etage" type="number"/>
 
@@ -104,9 +114,10 @@ export default {
         "houseImages": imageUrlIds
 
       }
-      debugger
 
       let houseResponse = (await axios.put(baseUrl + "/api/house?houseId="+this.$route.params?.id, home, config)).data
+
+
       console.log(houseResponse)
 
     },
@@ -139,7 +150,6 @@ export default {
     },
      async createdNewHouse() {
 
-      debugger
        const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL
 
        const config = {
@@ -206,7 +216,7 @@ export default {
       price:'',
       imageUrl:"",
       imageId: 1,
-      user: getLocalUser(),
+      user: getLocalUser,
       isUpdate: false
 
     }

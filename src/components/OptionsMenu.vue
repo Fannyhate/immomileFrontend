@@ -31,13 +31,15 @@
 </template>
 
 <script>
-import checkUser from './utils/authentication'
+
 import './styles/options.css'
+import  getLocalUser from './utils/authentication'
 export default {
   name: "OptionsMenu",
   methods :{
       getRenterStatus(){
-        let user = checkUser()
+
+        let user = getLocalUser.getLocalUser()
         this.isRenter = user?.isRenter
       }
   },

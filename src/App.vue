@@ -1,20 +1,20 @@
 <script setup>
 import {RouterLink, RouterView, useRoute} from 'vue-router'
 import { watch, onMounted, ref } from 'vue'
-import {useAuth} from "@okta/okta-vue";
+import useAuth from "./components/utils/authentication"
 import './views/styles/navbar.css'
 import './views/styles/base.css'
 const authenticated = ref(false)
 
 const {router} = useRoute()
 
-const {auth} = useAuth()
+
 async function logout() {
-  await auth.signOut()
+  await useAuth.logOut()
 }
 
 async function isAuthenticated () {
-  authenticated.value = await auth?.isAuthenticated()
+  authenticated.value = await useAuth?.getLocalUser()
 }
 
 watch(() => {router?.path}, async () => {
@@ -23,30 +23,33 @@ watch(() => {router?.path}, async () => {
 
 onMounted(async () => {
   await isAuthenticated()
-  auth?.authStateManager.subscribe(isAuthenticated)
 })
+
 
 </script>
 
 <template>
   <header>
-    <nav sticky>
+    <nav v-if="authenticated" sticky>
       <ul>
         <li><RouterLink to="/">Home</RouterLink></li>
-        <li><a href="options">MY Houses</a></li>
+        <li><a href="/options">MY Houses</a></li>
         <li> <RouterLink to="/login" v-if="!authenticated">
           Login
         </RouterLink>
         </li>
         <li style="float:right"><RouterLink to="/about">About</RouterLink> </li>
         <li>
-          <RouterLink to="/profile" v-if="authenticated" >
+          <RouterLink v to="/profile" v-if="authenticated" >
             Profile
           </RouterLink>
         </li>
-        <li> <a v-if="authenticated" v-on:click="logout()">
-          Logout
-        </a>
+        <li >
+
+          <RouterLink v-on:click="logout()" to="/login" v-if="authenticated" >
+            Logout
+          </RouterLink>
+
         </li>
       </ul>
 

@@ -32,7 +32,7 @@ const router = createRouter({
         },
         {
             path: '/login/callback',
-            component: LoginCallback
+            component: Login
         },
         {
             path: '/options',
