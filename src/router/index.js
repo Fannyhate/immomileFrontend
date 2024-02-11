@@ -3,12 +3,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { LoginCallback, navigationGuard } from '@okta/okta-vue'
 //import Login from '@/views/Login.vue'
 import Login from "@/components/forms/Login.vue";
-import Profile from '@/views/Profile.vue'
 import AboutView from "@/views/AboutView.vue";
 import HouseItems from "@/components/house/HouseItems.vue";
 import OptionsMenu from "@/components/OptionsMenu.vue";
 import Owner from "@/components/owner/Owner.vue";
 import Register from "@/components/forms/Register.vue";
+import Profile from "@/components/forms/Profile.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -58,10 +58,7 @@ const router = createRouter({
         },
         {
             path: '/profile',
-            component: Profile,
-            meta: {
-                requiresAuth: true
-            }
+            component: Profile
         },
     ]
 })

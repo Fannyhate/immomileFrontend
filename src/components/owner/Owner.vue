@@ -1,15 +1,5 @@
 <template>
 
-  <div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p>Some text in the Modal..</p>
-    </div>
-
-  </div>
-
   <div class="form" >
 
     <div class="container">
@@ -118,6 +108,10 @@ export default {
       let houseResponse = (await axios.put(baseUrl + "/api/house?houseId="+this.$route.params?.id, home, config)).data
 
 
+      if(houseResponse?.id> 0){
+        window.location.reload()
+      }
+
       console.log(houseResponse)
 
     },
@@ -149,6 +143,7 @@ export default {
 
     },
      async createdNewHouse() {
+
 
        const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL
 
@@ -186,8 +181,12 @@ export default {
        }
 
        let houseResponse = (await axios.post(baseUrl + "/api/house", home, config)).data
+
+       if(houseResponse?.id> 0){
+         window.location.reload()
+       }
        console.log(houseResponse)
-       //TODO after creating a house what will happen
+       //TODO  after creating a house what will happen
 
 
      },
@@ -216,7 +215,7 @@ export default {
       price:'',
       imageUrl:"",
       imageId: 1,
-      user: getLocalUser,
+      user: getLocalUser.getLocalUser(),
       isUpdate: false
 
     }

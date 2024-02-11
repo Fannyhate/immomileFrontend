@@ -1,7 +1,13 @@
 <template>
 
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="container">
+
+    <div class="about">
+      <h1>This is an about page</h1>
+
+      <h3> </h3>
+    </div>
+
   </div>
 
 </template>
@@ -13,5 +19,7 @@ name: "AboutView"
 </script>
 
 <style scoped>
-
+.about {
+  margin-top: 60px;
+}
 </style>

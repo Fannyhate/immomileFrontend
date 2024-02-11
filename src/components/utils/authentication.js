@@ -7,8 +7,12 @@ const getLocalUser = ()=>{
     }
     else {
         if(!window.location.href.includes("/login")){
-            window.localStorage.setItem("userInfo", "")
-            window.location.href ="/login"
+            if(!window.location.href.includes("/register")){
+                window.localStorage.setItem("userInfo", "")
+                window.location.href ="/login"
+            }
+
+
         }
 
 
